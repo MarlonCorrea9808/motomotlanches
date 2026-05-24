@@ -1,0 +1,738 @@
+from pathlib import Path
+import shutil, zipfile, textwrap
+
+base = Path("/mnt/data/motomoto_site")
+base.mkdir(exist_ok=True)
+
+# Copy uploaded logo image into the website folder with the exact name used in HTML
+src_img = Path("/mnt/data/motomotolanches.jpg")
+dst_img = base / "motomotolanches.jpg"
+if src_img.exists():
+    shutil.copy(src_img, dst_img)
+
+html = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moto-Moto Lanches</title>
+  <meta name="description" content="Moto-Moto Lanches: xis, pastel, folhado, cerveja, refrigerante e água. Peça pelo WhatsApp." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- TROQUE 5551999999999 PELO WHATSAPP OFICIAL DA LANCHERIA -->
+
+  <header>
+    <div class="nav">
+      <a href="#inicio" class="brand">
+        <img src="motomotolanches.jpg" alt="Logo Moto-Moto Lanches" />
+        <span>Moto-Moto Lanches</span>
+      </a>
+
+      <nav class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#promos">Promoções</a>
+        <a href="#pedido">Pedido</a>
+      </nav>
+
+      <a class="btn-zap" href="https://wa.me/5551999999999?text=Olá,%20vim%20pelo%20site%20da%20Moto-Moto%20Lanches%20🍔🔥" target="_blank">
+        Pedir agora
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <div>
+          <span class="tag">Lanche raiz da quebrada</span>
+          <h1>Moto-Moto <span>Lanches</span></h1>
+          <p>
+            Xis caprichado, pastel crocante, folhado quentinho e bebidas geladas.
+            Uma lancheria nova chegando com sabor forte, preço justo e atendimento de respeito.
+          </p>
+
+          <div class="hero-buttons">
+            <a class="btn-main" href="https://wa.me/5551999999999?text=Olá,%20quero%20fazer%20um%20pedido%20na%20Moto-Moto%20Lanches%20🍔🔥" target="_blank">Chamar no WhatsApp</a>
+            <a class="btn-outline" href="#cardapio">Ver cardápio</a>
+          </div>
+        </div>
+
+        <div class="hero-logo">
+          <img src="motomotolanches.jpg" alt="Moto-Moto Lanches" />
+        </div>
+      </div>
+    </section>
+
+    <section class="promo" id="promos">
+      <div class="container">
+        <div class="promo-box">
+          <div>
+            <h2>🔥 Promo da Quebrada</h2>
+            <p>
+              Comece forte: use esta área para colocar a promoção do dia.
+              Exemplo: Xis + Refri por preço especial ou Pastel em dobro em dia de movimento fraco.
+            </p>
+          </div>
+          <a class="btn-zap" href="https://wa.me/5551999999999?text=Olá,%20quero%20saber%20qual%20é%20a%20promoção%20de%20hoje%20da%20Moto-Moto%20Lanches%20🔥" target="_blank">
+            Ver promoção
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="cardapio">
+      <div class="container">
+        <div class="section-title">
+          <span>Nosso cardápio</span>
+          <h2>Escolha seu lanche</h2>
+          <p>Altere os preços no código quando tiver os valores definidos.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card"><div class="card-img">🍔</div><div class="card-content"><h3>Xis Salada</h3><p>Pão, carne, queijo, ovo, salada e molho especial.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20um%20Xis%20Salada%20🍔" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🥓</div><div class="card-content"><h3>Xis Bacon</h3><p>Xis bem recheado com bacon crocante e queijo derretido.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20um%20Xis%20Bacon%20🥓" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🥟</div><div class="card-content"><h3>Pastel</h3><p>Pastel frito na hora, crocante por fora e bem recheado.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20pastel%20🥟" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🥐</div><div class="card-content"><h3>Folhado</h3><p>Folhado quentinho, massa leve e recheio saboroso.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20folhado%20🥐" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🍺</div><div class="card-content"><h3>Cerveja</h3><p>Cerveja gelada para acompanhar o lanche.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20cerveja%20🍺" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🥤</div><div class="card-content"><h3>Refrigerante</h3><p>Refrigerante gelado: lata, 600ml ou 2 litros.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20refrigerante%20🥤" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">💧</div><div class="card-content"><h3>Água</h3><p>Água gelada para acompanhar seu pedido.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20pedir%20água%20💧" target="_blank">Pedir</a></div></article>
+          <article class="card"><div class="card-img">🔥</div><div class="card-content"><h3>Combo Moto-Moto</h3><p>Monte um combo com lanche + bebida para vender mais.</p><span class="price">R$ --,--</span><a href="https://wa.me/5551999999999?text=Olá,%20quero%20montar%20um%20combo%20Moto-Moto%20🔥" target="_blank">Pedir</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <span>Por que pedir aqui?</span>
+          <h2>Começando com qualidade</h2>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature"><strong>🔥</strong><h3>Lanche quente</h3><p>Pedido preparado na hora, com aquele cheiro de chapa e pastel frito.</p></div>
+          <div class="feature"><strong>⚡</strong><h3>Pedido fácil</h3><p>O cliente clica, chama no WhatsApp e já manda o pedido pronto.</p></div>
+          <div class="feature"><strong>💰</strong><h3>Preço justo</h3><p>Combos e promoções para girar venda e conquistar cliente fixo.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pedido" id="pedido">
+      <div class="container">
+        <div class="order-box">
+          <div>
+            <h2>Peça pelo WhatsApp</h2>
+            <p>Para vender mais no começo, deixe o atendimento simples: o cliente escolhe, clica no botão e já chama com a mensagem automática.</p>
+            <a class="big-whats" href="https://wa.me/5551999999999?text=Olá,%20vim%20pelo%20site%20da%20Moto-Moto%20Lanches%20e%20quero%20fazer%20um%20pedido%20🍔🔥" target="_blank">Fazer pedido agora</a>
+          </div>
+
+          <ul class="order-list">
+            <li>✅ Informe o lanche desejado</li>
+            <li>✅ Escolha bebida e adicionais</li>
+            <li>✅ Envie endereço para entrega</li>
+            <li>✅ Combine forma de pagamento</li>
+            <li>✅ Receba seu lanche quentinho</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h2>Moto-Moto Lanches</h2>
+    <p>O sabor mais bruto da quebrada 🍔🔥</p>
+    <p>Atendimento pelo WhatsApp | Delivery e retirada</p>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/5551999999999?text=Olá,%20vim%20pelo%20site%20da%20Moto-Moto%20Lanches%20🍔🔥" target="_blank" aria-label="WhatsApp">☎</a>
+
+</body>
+</html>
+"""
+
+css = """* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --vermelho: #e10600;
+  --amarelo: #ffd21f;
+  --laranja: #ff7a00;
+  --preto: #080808;
+  --branco: #ffffff;
+  --cinza: #151515;
+  --verde: #25d366;
+}
+
+/* HEADER */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 210, 31, 0.25);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--amarelo);
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(255, 210, 31, 0.55);
+}
+
+.brand img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--amarelo);
+  box-shadow: 0 0 18px rgba(225, 6, 0, 0.8);
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.menu a:hover {
+  color: var(--amarelo);
+}
+
+.btn-zap {
+  background: var(--verde);
+  color: #031b0c;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 900;
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.45);
+  transition: 0.3s;
+}
+
+.btn-zap:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 130px 20px 70px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.88)),
+    radial-gradient(circle at 20% 30%, rgba(225, 6, 0, 0.35), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(255, 210, 31, 0.22), transparent 22%),
+    linear-gradient(135deg, #171717 0%, #050505 100%);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 45px 45px;
+  opacity: 0.25;
+}
+
+.hero::after {
+  content: "MOTO-MOTO";
+  position: absolute;
+  right: -80px;
+  bottom: 50px;
+  font-size: 130px;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 210, 31, 0.08);
+  transform: rotate(-8deg);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(225, 6, 0, 0.18);
+  border: 1px solid rgba(255, 210, 31, 0.45);
+  color: var(--amarelo);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(225, 6, 0, 0.7);
+}
+
+.hero h1 span {
+  color: var(--amarelo);
+  display: block;
+  text-shadow: 0 0 24px rgba(255, 210, 31, 0.7);
+}
+
+.hero p {
+  max-width: 640px;
+  color: #e9e9e9;
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-main,
+.btn-outline {
+  padding: 15px 22px;
+  border-radius: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-main {
+  background: linear-gradient(135deg, var(--vermelho), var(--laranja));
+  color: white;
+  box-shadow: 0 0 25px rgba(225, 6, 0, 0.65);
+}
+
+.btn-outline {
+  border: 2px solid var(--amarelo);
+  color: var(--amarelo);
+}
+
+.btn-main:hover,
+.btn-outline:hover {
+  transform: translateY(-4px);
+}
+
+.hero-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo img {
+  width: min(520px, 100%);
+  object-fit: contain;
+  background: rgba(255,255,255,0.04);
+  padding: 10px;
+  border-radius: 50%;
+  border: 5px solid var(--amarelo);
+  box-shadow:
+    0 0 35px rgba(225, 6, 0, 0.9),
+    0 0 60px rgba(255, 210, 31, 0.35);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* SECTIONS */
+section {
+  padding: 80px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.section-title span {
+  color: var(--amarelo);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.section-title h2 {
+  font-size: clamp(34px, 5vw, 58px);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.section-title p {
+  color: #cfcfcf;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* PROMO */
+.promo {
+  background: linear-gradient(135deg, var(--vermelho), #4b0000);
+  border-top: 2px solid var(--amarelo);
+  border-bottom: 2px solid var(--amarelo);
+}
+
+.promo-box {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 25px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 0 35px rgba(0,0,0,0.35);
+}
+
+.promo-box h2 {
+  font-size: clamp(30px, 5vw, 52px);
+  text-transform: uppercase;
+  color: var(--amarelo);
+}
+
+.promo-box p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #fff7d0;
+  margin-top: 8px;
+}
+
+/* CARDAPIO */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: linear-gradient(180deg, #1a1a1a, #0c0c0c);
+  border: 1px solid rgba(255, 210, 31, 0.25);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+  transition: 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--amarelo);
+  box-shadow: 0 0 35px rgba(225, 6, 0, 0.45);
+}
+
+.card-img {
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 66px;
+  background:
+    radial-gradient(circle, rgba(255,210,31,0.25), transparent 45%),
+    linear-gradient(135deg, #3b0000, #151515);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  font-size: 22px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--amarelo);
+}
+
+.card-content p {
+  color: #cfcfcf;
+  line-height: 1.5;
+  min-height: 48px;
+}
+
+.price {
+  display: block;
+  margin: 15px 0;
+  color: #35ff73;
+  font-weight: 900;
+  font-size: 22px;
+  text-shadow: 0 0 12px rgba(53,255,115,0.55);
+}
+
+.card a {
+  display: block;
+  text-align: center;
+  background: var(--vermelho);
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card a:hover {
+  background: var(--amarelo);
+  color: #000;
+}
+
+/* DIFERENCIAIS */
+.features {
+  background: #0d0d0d;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.feature {
+  background: #151515;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+
+.feature strong {
+  display: block;
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  color: var(--amarelo);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  color: #d7d7d7;
+  line-height: 1.5;
+}
+
+/* PEDIDO */
+.pedido {
+  background:
+    linear-gradient(rgba(0,0,0,0.88), rgba(0,0,0,0.92)),
+    linear-gradient(135deg, #220000, #050505);
+}
+
+.order-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 210, 31, 0.25);
+  border-radius: 28px;
+  padding: 35px;
+}
+
+.order-box h2 {
+  font-size: clamp(32px, 5vw, 55px);
+  text-transform: uppercase;
+  color: var(--amarelo);
+  margin-bottom: 15px;
+}
+
+.order-box p {
+  color: #e6e6e6;
+  line-height: 1.7;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.order-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.order-list li {
+  background: #141414;
+  padding: 13px 15px;
+  border-radius: 14px;
+  border-left: 4px solid var(--amarelo);
+}
+
+.big-whats {
+  display: inline-block;
+  margin-top: 24px;
+  background: var(--verde);
+  color: #001507;
+  padding: 17px 25px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 0 25px rgba(37,211,102,0.45);
+}
+
+/* FOOTER */
+footer {
+  background: #030303;
+  text-align: center;
+  padding: 35px 20px;
+  border-top: 1px solid rgba(255, 210, 31, 0.2);
+}
+
+footer h2 {
+  color: var(--amarelo);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+footer p {
+  color: #aaa;
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 999;
+  width: 62px;
+  height: 62px;
+  background: var(--verde);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 0 25px rgba(37,211,102,0.65);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .menu {
+    display: none;
+  }
+
+  .hero-content,
+  .order-box,
+  .promo-box {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand span {
+    font-size: 14px;
+  }
+
+  .brand img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .btn-zap {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .hero {
+    padding-top: 110px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-box,
+  .order-box {
+    padding: 24px;
+  }
+}
+"""
+
+(base / "index.html").write_text(html, encoding="utf-8")
+(base / "style.css").write_text(css, encoding="utf-8")
+
+zip_path = Path("/mnt/data/motomoto_site_completo.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for file in base.iterdir():
+        z.write(file, arcname=file.name)
+
+zip_path.as_posix()
