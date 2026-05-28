@@ -317,11 +317,40 @@ section {
 
 /* MOBILE */
 
+
 @media (max-width: 900px) {
 
   .menu {
     display: none;
   }
+  .hero-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-logo img {
+  width: 520px;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 5px solid #ffd21f;
+  box-shadow:
+    0 0 35px rgba(225, 6, 0, 0.9),
+    0 0 60px rgba(255, 210, 31, 0.35);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100%{
+    transform: translateY(0);
+  }
+
+  50%{
+    transform: translateY(-12px);
+  }
+}
+
+/* MOBILE */
 
   .hero-content {
     grid-template-columns: 1fr;
